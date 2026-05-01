@@ -1,0 +1,71 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // --- HELPER FUNCTIONS ---
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isVerified() {
+      return isSignedIn(); // Adicionar && request.auth.token.email_verified == true se desejar maior segurança
+    }
+
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function hasRole(roles) {
+      return isSignedIn() && (getUserData().role in roles);
+    }
+
+    function isAdmin() {
+      return hasRole(['admin']);
+    }
+
+    function isSupervisor() {
+      return hasRole(['admin', 'supervisor']);
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      // Permite criar o próprio perfil se for o email do desenvolvedor (bootstrap) ou se for um admin criando
+      allow create: if isSignedIn() && (
+        (request.auth.uid == userId && request.auth.token.email == 'rafaelventurademello@gmail.com') ||
+        isAdmin()
+      );
+      // Apenas admins podem mudar papéis (roles). Usuários podem atualizar seus próprios nomes.
+      allow update: if isAdmin() || (
+        request.auth.uid == userId && 
+        !(request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'email', 'uid']))
+      );
+      allow delete: if isAdmin();
+    }
+
+    // Checklists collection
+    match /checklists/{checklistId} {
+      allow read: if isSignedIn();
+      allow write: if isSupervisor();
+    }
+
+    // Assignments collection
+    match /assignments/{assignmentId} {
+      allow read: if isSignedIn() && (
+        isSupervisor() || resource.data.assignedTo == request.auth.uid
+      );
+      allow create: if isSupervisor();
+      allow update: if isSupervisor() || (
+        isSignedIn() && 
+        resource.data.assignedTo == request.auth.uid && 
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'itemsStatus', 'completedAt'])
+      );
+      allow delete: if isSupervisor();
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Public and private data for users",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "name": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "supervisor", "technician"] },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["uid", "email", "name", "role", "createdAt"]
+    },
+    "Checklist": {
+      "title": "Checklist Template",
+      "description": "Standard checklist templates",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": { "$ref": "#/entities/ChecklistItem" }
+        },
+        "createdBy": { "type": "string" },
+        "createdAt": { "type": "number" }
+      }
+    },
+    "ChecklistItem": {
+      "title": "Checklist Item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "required": { "type": "boolean" }
+      }
+    },
+    "Assignment": {
+      "title": "Checklist Assignment",
+      "description": "Specific assignment of a checklist to a technician",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "checklistId": { "type": "string" },
+        "checklistTitle": { "type": "string" },
+        "assignedTo": { "type": "string" },
+        "assignedToName": { "type": "string" },
+        "assignedBy": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "in_service", "waiting_part", "completed", "approved", "rejected"] },
+        "dueDate": { "type": "string" },
+        "scheduledAt": { "type": "number" },
+        "completedAt": { "type": "number" },
+        "isDaily": { "type": "boolean" },
+        "itemsStatus": { "type": "object" }
+      }
+    }
+  },
+  "firestore": {
+    "users": {
+      "schema": "UserProfile",
+      "description": "Collection of user profiles"
+    },
+    "checklists": {
+      "schema": "Checklist",
+      "description": "Collection of checklist templates"
+    },
+    "assignments": {
+      "schema": "Assignment",
+      "description": "Collection of checklist assignments"
+    }
+  }
+}

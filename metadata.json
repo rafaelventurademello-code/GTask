@@ -1,0 +1,6 @@
+{
+  "name": "GTask",
+  "description": "Gestão técnica de checklists, manutenção de equipamentos e controle de frota GTask (ex-Getel Soluções).",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": []
+}
