@@ -638,7 +638,7 @@ const Users = () => {
           <div>
             <label className="block text-sm font-medium text-blue-900 mb-1">Nível de Acesso (Perfil)</label>
             <select value={formData.role} onChange={e => setFormData({ ...formData, role: e.target.value as UserRole })} className="w-full p-3 rounded-xl border border-blue-100 outline-none focus:ring-2 focus:ring-blue-500 bg-white">
-              <option value={UserRole.TECHNICIAN}>Técnico (Campo/Oficina)</option>
+              <option value={UserRole.TECHNICIAN}>Técnico</option>
               <option value={UserRole.SUPERVISOR}>Supervisor</option>
               <option value={UserRole.COORDINATOR}>Coordenador</option>
               <option value={UserRole.ADMIN}>Administrador</option>

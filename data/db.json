@@ -27,10 +27,18 @@
     {
       "name": "Rangel Luis",
       "email": "rangel.luis@geteltecnologia.com.br",
-      "role": "Técnico",
+      "role": "supervisor",
       "password": "Password123!",
       "id": "810x28p5x",
       "createdAt": 1777606044720
+    },
+    {
+      "name": "Donavan",
+      "email": "donavan@geteltecnologia.com.br",
+      "role": "Técnico",
+      "password": "Password123!",
+      "id": "g16fhelxz",
+      "createdAt": 1777644877248
     }
   ],
   "checklists": [
@@ -144,10 +152,20 @@
       "assignedToName": "Rafael Ventura",
       "dueDate": "2026-05-01",
       "isDaily": true,
-      "status": "Pendente",
-      "itemsStatus": {},
+      "status": "Concluida",
+      "itemsStatus": {
+        "1": {
+          "completed": true,
+          "timestamp": 1777644488431
+        },
+        "0.7091646783176396": {
+          "completed": true,
+          "timestamp": 1777644489588
+        }
+      },
       "id": "a767km",
-      "scheduledAt": 1777608881517
+      "scheduledAt": 1777608881517,
+      "completedAt": 1777644492047
     }
   ]
 }
