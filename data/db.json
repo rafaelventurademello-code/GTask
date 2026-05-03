@@ -166,6 +166,18 @@
       "id": "a767km",
       "scheduledAt": 1777608881517,
       "completedAt": 1777644492047
+    },
+    {
+      "checklistId": "c12pj0",
+      "checklistTitle": "Logan",
+      "assignedTo": "1w1p5brey",
+      "assignedToName": "Leonardo Torquato",
+      "dueDate": "2026-05-02",
+      "isDaily": true,
+      "status": "Pendente",
+      "itemsStatus": {},
+      "id": "aqt1mj",
+      "scheduledAt": 1777748898651
     }
   ]
 }

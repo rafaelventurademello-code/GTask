@@ -554,7 +554,10 @@ const Users = () => {
       <header className="flex justify-between items-end">
         <div>
           <h1 className="text-3xl font-bold text-blue-900">Gestão de Usuários</h1>
-          <p className="text-blue-500">Adicione ou remova permissões de acesso.</p>
+          <p className="text-blue-500 flex items-center gap-2">
+            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            {users.length} usuários cadastrados no sistema.
+          </p>
         </div>
         {currentUserRole === UserRole.ADMIN && (
           <button
@@ -697,7 +700,10 @@ const Checklists = () => {
       <header className="flex justify-between items-end">
         <div>
           <h1 className="text-3xl font-bold text-blue-900">Modelos de Checklist</h1>
-          <p className="text-blue-500">Padronização por ambiente ou setor.</p>
+          <p className="text-blue-500 flex items-center gap-2">
+            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            {checklists.length} modelos configurados.
+          </p>
         </div>
         <button
           onClick={() => handleOpen()}
@@ -818,7 +824,10 @@ const Assignments = () => {
       <header className="flex justify-between items-end">
         <div>
           <h1 className="text-3xl font-bold text-blue-900">Gestão de Tarefas</h1>
-          <p className="text-blue-500">Controle de atendimentos e preventivas.</p>
+          <p className="text-blue-500 flex items-center gap-2">
+            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            {displayAssignments.length} tarefas encontradas no sistema.
+          </p>
         </div>
         {role !== UserRole.TECHNICIAN && (
           <button
@@ -1204,7 +1213,10 @@ const Reports = () => {
     <div className="space-y-8 animate-in fade-in duration-500">
       <header>
         <h1 className="text-3xl font-bold text-blue-900">Relatórios Operacionais</h1>
-        <p className="text-blue-500">Análise de produtividade técnica GTask.</p>
+        <p className="text-blue-500 flex items-center gap-2">
+          <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+          Dados consolidados de {assignments.length} tarefas.
+        </p>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
